@@ -1,0 +1,12 @@
+# Blocklist files/folders in same directory as the gitignore file
+/*
+
+# Includelist some files
+!.gitignore
+!README.md
+!passwordmanager.py
+
+#Ignore all files named .txt
+**/.txt
+
+
