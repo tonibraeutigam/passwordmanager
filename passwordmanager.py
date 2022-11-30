@@ -63,7 +63,8 @@ def mainmenu_two(exist_file_name):
         elif choice == "2":
             add_new_password(exist_file_name)
         elif choice == "3":
-            delete_existing_password()
+            line_number = int(input("Which linie do you want to delete: "))    
+            delete_existing_password(exist_file_name, line_number) 
         elif choice == "4":
             update_password()
         elif choice == "5":
@@ -81,10 +82,6 @@ def show_existing_password(exist_file_name):
         data_format = "{0:10s}{1:10s}{2:25s}{3:30s}{4:50s}".format(str(count),data[0],data[1],data[2],data[3])
         print(data_format)
     f.close()
-
-        #data_format = "{0:10s}{1:10s}{2:25s}{3:320s}{4:50s}".format("index",data[0],data[1],data[2],data[3])
-        #print(data_format)
-        #return exist_file_name
    
 
 def add_new_password(file_name):
@@ -97,7 +94,23 @@ def add_new_password(file_name):
     f.close()
     return file_name
 
-def delete_existing_password():
+def delete_existing_password(exist_file_name, line_number):
+    
+    with open(exist_file_name) as file:
+        # reading line by line
+        lines = file.readlines()
+        
+    if(line_number <=len(lines)):
+        del lines[line_number -1]
+        
+        with open(exist_file_name, "w") as file:
+            for line in lines:
+                file.write(line)
+    else:
+        print("Line", line_number, " not in file.")
+        print("File has", len(lines), "lines.")
+
+    #delete_line_number = str(input("Which linie do you want to delete: "))
     pass
 
 def update_password():
@@ -116,3 +129,4 @@ def doc_header():
 main()
 #open_database()
 #show_existing_password()
+#delete_existing_password("test.txt", 2)
